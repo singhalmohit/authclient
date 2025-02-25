@@ -42,7 +42,7 @@ jdks/
 kotlin-profile/
 native/
 wrapper/
-
+!android/app
 # node.js
 #
 node_modules/
