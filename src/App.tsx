@@ -11,9 +11,6 @@ const App = () => {
         <AppNavigator />
       </GestureHandlerRootView>
     </Provider>
-    // <SafeAreaView>
-    //   <Text>EasyLife</Text>
-    // </SafeAreaView>
   );
 };
 
