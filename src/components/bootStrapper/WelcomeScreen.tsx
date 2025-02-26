@@ -2,8 +2,11 @@
 import React from 'react';
 import { useSelector } from 'react-redux';
 
-const WelcomeScreen = ({navigation}) => {
+const WelcomeScreen = ({
+  navigation
+}: any) => {
 
+  // @ts-expect-error TS(2571): Object is of type 'unknown'.
   const userFormData = useSelector((state)=> state.userFormData);
 
 
