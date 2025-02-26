@@ -14,7 +14,10 @@ startCleanup "tmp"
 
 npm cache clean --force
 npm i
-npx pod-install ios
+
+cd ios
+pod install
+cd ..
 
 cd android
 ./gradlew clean
