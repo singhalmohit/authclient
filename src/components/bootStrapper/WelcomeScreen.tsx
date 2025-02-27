@@ -4,12 +4,13 @@ import { useDispatch } from 'react-redux';
 import { registerGuestRequest, RegisterGuestPayload } from './slices/registerGuestSlice';
 import useInstallationInfo, { InstallationInfo} from '../hooks/useInstallationInfo';
 import {useAppSelector} from '../hooks/useAppSelector';
+import { AppError } from '../../common/errors/appError';
 
 
 const WelcomeScreen = ({navigation}: any) => {
   const guestAccessToken = useAppSelector((state) => state.registerGuest.guestAccessToken);
   const error = useAppSelector((state) => state.registerGuest.error);
-  //const loading = useAppSelector((state) => state.registerGuest.loading);
+  const loading = useAppSelector((state) => state.registerGuest.loading);
 
   const installationInfo: InstallationInfo  = useInstallationInfo();
   const deviceId = installationInfo.deviceId;
@@ -36,6 +37,7 @@ const WelcomeScreen = ({navigation}: any) => {
   return (
     <View>
       <Text>WelcomeScreen</Text>
+      <Text>{loading ? 'Loading...' : error ? error.message : 'Successfully register the device >> ' + guestAccessToken}</Text>
       <Button title="Get Started to fill form" onPress={()=>{navigation.navigate('Home')}} />
       </View>
   );

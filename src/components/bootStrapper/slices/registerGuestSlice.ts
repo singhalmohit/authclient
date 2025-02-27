@@ -1,4 +1,5 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
+import { AppError } from '../../../common/errors/appError';
 
 export interface RegisterGuestPayload {
     deviceSignatureId: string;
@@ -7,12 +8,7 @@ export interface RegisterGuestPayload {
 interface RegisterGuestState {
     loading: boolean;
     guestAccessToken: string | null;
-    error: RegisterGuestError | null;
-}
-
-export interface RegisterGuestError {
-    status: string;
-    message: string;
+    error: AppError | null;
 }
 
 const initialState: RegisterGuestState = {
@@ -33,7 +29,7 @@ const registerGuestSlice = createSlice({
             state.loading = false;
             state.guestAccessToken = action.payload;
         },
-        registerGuestRequestFailed: (state, action: PayloadAction<RegisterGuestError>) => {
+        registerGuestRequestFailed: (state, action: PayloadAction<AppError>) => {
             state.loading = false;
             state.error = action.payload;
         },
