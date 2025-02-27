@@ -1,9 +1,18 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
+export interface RegisterGuestPayload {
+    deviceSignatureId: string;
+}
+
 interface RegisterGuestState {
     loading: boolean;
     guestAccessToken: string | null;
-    error: string | null;
+    error: RegisterGuestError | null;
+}
+
+export interface RegisterGuestError {
+    status: string;
+    message: string;
 }
 
 const initialState: RegisterGuestState = {
@@ -16,7 +25,7 @@ const registerGuestSlice = createSlice({
     name: 'registerGuest',
     initialState,
     reducers: {
-        registerGuestRequest: (state, action: PayloadAction<string>) => {
+        registerGuestRequest: (state, action: PayloadAction<RegisterGuestPayload>) => {
             state.loading = true;
             state.error = null;
         },
@@ -24,7 +33,7 @@ const registerGuestSlice = createSlice({
             state.loading = false;
             state.guestAccessToken = action.payload;
         },
-        registerGuestRequestFailed: (state, action: PayloadAction<string>) => {
+        registerGuestRequestFailed: (state, action: PayloadAction<RegisterGuestError>) => {
             state.loading = false;
             state.error = action.payload;
         },
