@@ -1,14 +1,29 @@
 ;import { View, Text, Button } from 'react-native';
-import React from 'react';
-import { useSelector } from 'react-redux';
+import React, { useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { registerGuestRequest } from './slices/registerGuestSlice';
+import useInstallationInfo, { InstallationInfo} from '../hooks/useInstallationInfo';
 
-const WelcomeScreen = ({
-  navigation
-}: any) => {
+const WelcomeScreen = ({navigation}: any) => {
+  const installationInfo: InstallationInfo  = useInstallationInfo();
+  const dispatch = useDispatch();
+  const bootHandler = () => {
+    // perform api call
+    console.log('Boot');
+    console.log(installationInfo.deviceId);
+    // if(installationInfo && installationInfo.deviceId !== null){
+    //   const payload = {
+    //     deviceSignatureId: installationInfo.deviceId,
+    //   };
+    //   dispatch(registerGuestRequest(payload));
+    // }
+    // need to dispatch action for registering guest user
+  };
 
-  // @ts-expect-error TS(2571): Object is of type 'unknown'.
-  const userFormData = useSelector((state)=> state.userFormData);
-
+  useEffect(() => {
+    
+    bootHandler();
+  },[installationInfo]);
 
   return (
     <View>
